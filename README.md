@@ -3,109 +3,155 @@ Steps:
 2. Created a Neural Network model with score and time_taken as inputs and trained the model on the dataset to predict the Cognitive Health Score.
 3. Added prediction model to quiz.py to predict the Cognitive_Health_Score based on the voice inputs given by the user.
 
->import speech_recognition as sr
->import time
->from gtts import gTTS
->from playsound import playsound
->import os
->import tensorflow as tf
->import numpy as np
+>Welcome to the Cognitive Health Quiz!
 >
->def speak(obj):
->    t1 = gTTS(text=str(obj), lang='en', slow=False)  
->    t1.save("HACKATHONS/WELLVISE/question.mp3")
->    playsound("HACKATHONS/WELLVISE/question.mp3")
->    os.remove("HACKATHONS/WELLVISE/question.mp3")
+>Question 1: Do you read something and find you haven’t been thinking about it and must read it again?
 >
->quiz = [
->    {
->        "question": "Do you read something and find you haven’t been thinking about it and must read it again?",
->        "answers": ["Very often", "Quite often", "Occasionally", "Very rarely", "Never"]
->    },
->    {
->        "question": "Do you find you forget why you went from one part of the house to the other?",
->        "answers": ["Very often", "Quite often", "Occasionally", "Very rarely", "Never"]
->    },
->    {
->        "question": "Do you fail to notice signposts on the road?",
->        "answers": ["Very often", "Quite often", "Occasionally", "Very rarely", "Never"]
->    },
->    {
->        "question": "Do you find you confuse right and left when giving directions?",
->        "answers": ["Very often", "Quite often", "Occasionally", "Very rarely", "Never"]
->    },
->    {
->        "question": "Do you bump into people?",
->        "answers": ["Very often", "Quite often", "Occasionally", "Very rarely", "Never"]
->    },
->    {
->        "question": "Do you find you forget whether you’ve turned off a light or a fire or locked the door?",
->        "answers": ["Very often", "Quite often", "Occasionally", "Very rarely", "Never"]
->    },
->    {
->        "question": "Do you fail to listen to people’s names when you are meeting them?",
->        "answers": ["Very often", "Quite often", "Occasionally", "Very rarely", "Never"]
->    },
->    {
->        "question": "Do you say something and realize afterwards that it might be taken as insulting?",
->        "answers": ["Very often", "Quite often", "Occasionally", "Very rarely", "Never"]
->    },
->    {
->        "question": "Do you fail to hear people speaking to you when you are doing something else?",
->        "answers": ["Very often", "Quite often", "Occasionally", "Very rarely", "Never"]
->    },
->    {
->        "question": "Do you lose your temper and regret it?",
->        "answers": ["Very often", "Quite often", "Occasionally", "Very rarely", "Never"]
->    }
->]
+>Please choose your response:
+>1. Very often
+>2. Quite often
+>3. Occasionally
+>4. Very rarely
+>5. Never.
 >
->recognizer = sr.Recognizer()
->microphone = sr.Microphone()
+>result2:
+>{   'alternative': [{'transcript': 'very often'}, {'transcript': 'very open'}],
+>    'final': True}
+>very often
+>Question 2: Do you find you forget why you went from one part of the house to the other?
 >
->total_time = 0
-># correct_answers = 0
->cognitive_score = 0
->response_options=[4,3,2,1,0]
->answers= ["very often", "quite often", "occasionally", "very rarely", "never"]
+>Please choose your response:
+>1. Very often
+>2. Quite often
+>3. Occasionally
+>4. Very rarely
+>5. Never.
 >
->print("Welcome to the Cognitive Health Quiz!\n")
+>result2:
+>{'alternative': [{'transcript': 'occasionally'}], 'final': True}
+>occasionally
+>Question 3: Do you fail to notice signposts on the road?
 >
->for idx, question in enumerate(quiz):
->    print(f"Question {idx + 1}: {question['question']}")
+>Please choose your response:
+>1. Very often
+>2. Quite often
+>3. Occasionally
+>4. Very rarely
+>5. Never.
 >
->    speak(question["question"])
->    
->    print("\nPlease choose your response:\n"+"1. Very often\n"+"2. Quite often\n"+"3. Occasionally\n"+"4. Very rarely\n"+"5. >Never.\n")
+>result2:
+>{   'alternative': [   {'transcript': 'quite often'},
+>                       {'transcript': 'quiet often'},
+>                       {'transcript': 'quite open'}],
+>    'final': True}
+>quite often
+>Question 4: Do you find you confuse right and left when giving directions?
 >
->    start_time = time.time()
->    with microphone as source:
->        recognizer.adjust_for_ambient_noise(source)
->        audio = recognizer.listen(source)
+>Please choose your response:
+>1. Very often
+>2. Quite often
+>3. Occasionally
+>4. Very rarely
+>5. Never.
 >
->    end_time = time.time()
+>result2:
+>{'alternative': [{'transcript': 'never'}], 'final': True}
+>never
+>Question 5: Do you bump into people?
 >
->    user_answer = recognizer.recognize_google(audio)
->    print(user_answer)
+>Please choose your response:
+>1. Very often
+>2. Quite often
+>3. Occasionally
+>4. Very rarely
+>5. Never.
 >
->    time_taken = end_time - start_time
->    total_time += time_taken
+>result2:
+>{   'alternative': [   {'transcript': 'very rarely'},
+>                       {'transcript': 'very really'},
+>                       {'transcript': 'very rare early'}],
+>    'final': True}
+>very rarely
+>Question 6: Do you find you forget whether you’ve turned off a light or a fire or locked the door?
 >
->    try:                                                                                      
->        user_response = answers.index(str(user_answer.lower()))
->        cognitive_score += response_options[user_response]
->    except (ValueError,IndexError):
->        print("Invalid response, no score added.")
+>Please choose your response:
+>1. Very often
+>2. Quite often
+>3. Occasionally
+>4. Very rarely
+>5. Never.
 >
->print("\nQuiz completed!")
+>result2:
+>{   'alternative': [   {'transcript': 'quite often'},
+>                       {'transcript': 'quiet often'},
+>                       {'transcript': 'quite open'},
+>                       {'transcript': 'quit often'}],
+>    'final': True}
+>quite often
+>Question 7: Do you fail to listen to people’s names when you are meeting them?
 >
->print(f"Total Score: {cognitive_score}")
->print(f"Total Time Taken: {total_time:.2f} seconds")
+>Please choose your response:
+>1. Very often
+>2. Quite often
+>3. Occasionally
+>4. Very rarely
+>5. Never.
 >
->model = tf.keras.models.load_model('HACKATHONS/WELLVISE/cognitive_health_model.h5')
+>result2:
+>{   'alternative': [   {'transcript': 'never'},
+>                       {'transcript': 'nevar'},
+>                       {'transcript': 'neighbour'}],
+>    'final': True}
+>never
+>Question 8: Do you say something and realize afterwards that it might be taken as insulting?
 >
->input_values = np.column_stack((cognitive_score, total_time))
+>Please choose your response:
+>1. Very often
+>2. Quite often
+>3. Occasionally
+>4. Very rarely
+>5. Never.
 >
->cognitive_health_score_pred = model.predict(input_values)
+>result2:
+>{'alternative': [{'transcript': 'very rarely'}], 'final': True}
+>very rarely
+>Question 9: Do you fail to hear people speaking to you when you are doing something else?
 >
->print(f"Your predicted Cognitive Health Score is {cognitive_health_score_pred}")
+>Please choose your response:
+>1. Very often
+>2. Quite often
+>3. Occasionally
+>4. Very rarely
+>5. Never.
+>
+>result2:
+>{   'alternative': [   {'transcript': 'quite often'},
+>                       {'transcript': 'quiet often'},
+>                       {'transcript': 'quit often'},
+>                       {'transcript': 'quite open'}],
+>    'final': True}
+>quite often
+>Question 10: Do you lose your temper and regret it?
+>
+>Please choose your response:
+>1. Very often
+>2. Quite often
+>3. Occasionally
+>4. Very rarely
+>5. Never.
+>
+>result2:
+>{   'alternative': [   {'transcript': 'never'},
+>                       {'transcript': 'neighbour'},
+>                       {'transcript': 'nevar'}],
+>    'final': True}
+>never
+>
+>Quiz completed!
+>Total Score: 17
+>Total Time Taken: 44.78 seconds
+>2023-11-05 12:37:15.410877: I tensorflow/core/platform/cpu_feature_guard.cc:193] This TensorFlow binary is optimized with >oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX AVX2
+>To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+>2023-11-05 12:37:15.539683: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1616] Created device /job:localhost/replica:0/>task:0/device:GPU:0 with 1359 MB memory:  -> device: 0, name: NVIDIA GeForce MX450, pci bus id: 0000:01:00.0, compute >capability: 7.5
+>1/1 [==============================] - 0s 153ms/step
+>Your predicted Cognitive Health Score is [[1.2358252]]
