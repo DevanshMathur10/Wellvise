@@ -3,6 +3,8 @@ import time
 from gtts import gTTS
 from playsound import playsound
 import os
+import tensorflow as tf
+import numpy as np
 
 def speak(obj):
     t1 = gTTS(text=str(obj), lang='en', slow=False)  
@@ -90,11 +92,15 @@ for idx, question in enumerate(quiz):
     except (ValueError,IndexError):
         print("Invalid response, no score added.")
 
-Weight_Cognitive = 1.0
-Weight_Time = -0.1
-
-Cognitive_Health_Score = (Weight_Cognitive * cognitive_score) + (Weight_Time * total_time)
-
 print("\nQuiz completed!")
+
+print(f"Total Score: {cognitive_score}")
 print(f"Total Time Taken: {total_time:.2f} seconds")
-print(f"Cognitive Health Score: {Cognitive_Health_Score:.2f}")
+
+model = tf.keras.models.load_model('HACKATHONS/WELLVISE/cognitive_health_model.h5')
+
+input_values = np.column_stack((cognitive_score, total_time))
+
+cognitive_health_score_pred = model.predict(input_values)
+
+print(f"Your predicted Cognitive Health Score is {cognitive_health_score_pred}")
